@@ -1,0 +1,23 @@
+<!doctype html>
+
+<html>
+	<head>
+		<title>Page Title</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0">
+	</head>
+
+	<body>
+<h1> Here's the Juiciest stuff we got so far</h1>
+{% for secret in pop_secrets %}
+        {{secret.content}}}
+    {% endfor %}
+	</body>
+<form action="/back" method="post">
+    {% csrf_token %}
+<input type="submit" class="go_back" value="go back">
+</form>
+{% for secret in all %}
+<p>{{secret.content}}{{secret.created_at}}
+{% endfor %}
+</html>

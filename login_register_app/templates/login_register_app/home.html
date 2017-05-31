@@ -1,0 +1,42 @@
+<!doctype html>
+
+<html>
+	<head>
+		<title>Page Title</title>
+            {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'login_register_app/css/index.css' %}" media="screen" title="no title" charset="utf-8" />
+	</head>
+	<body>
+ {% csrf_token %}
+<h1> awwww snap look who'se here it's {{user.first_name}} {{first_name}}{{name}}</h1>
+<h2> Well since you're here now, spill some secrets for us?!?!</h2>
+<h2>Share some juicy goosie to read some juicy goosie!!</h2>
+<form action="spill" method="post"> 
+ {% csrf_token %}
+<textarea name = "content" rows="4" cols="50">
+</textarea>
+<input type="submit" name="submit">
+        </form>
+<h2> Here's some of our recent juicy goosie</h2>
+{% for secret in all %}
+<p>{{secret.content}}{{secret.created_at}}
+{%if id == secret.user.id%}
+<a href='/delete/{{secret.id}}'>Delete</a></p>
+<p id ="you"> You posted this!</p>
+{%endif%} 
+{% if id != secret.user.id %}
+<a href='/like/{{secret.id}}' action="POST" value="0"> Like</a>
+This has {{secret.liked_by.all.count}} likes
+{%endif%}
+               {%if secret.likes.all.count == 1%}
+            This post has {{secret.likes.all.count}} like.
+        {%else%}
+            This post has {{secret.likes.all.count}} likes.
+        {%endif%}
+{% endfor %}
+<form action="/logout" method="post">
+{% csrf_token %}
+<input type="submit" value="logout">
+</form>
+<a href="/popular" action="POST"> Click Here To Read The Juiciest Goose We've Heard To Date.</a>
+</body>

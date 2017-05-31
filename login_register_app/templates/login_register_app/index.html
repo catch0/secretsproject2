@@ -1,0 +1,50 @@
+<html>
+<head>
+    <title></title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'login_register_app/css/index.css' %}" media="screen" title="no title" charset="utf-8" />
+</head>
+<body>
+    <h2>Register</h2>
+    <form action="/register" method="post">
+        {% csrf_token %}
+        {% if messages %}
+            {% for message in messages %}
+                <p class="{{ message.tags }}">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+        <label>First Name:
+            <input type="text" name="first_name" /> 
+        </label>
+        <label>Last Name: 
+            <input type="text" name="last_name" /> 
+        </label>
+        <label>Email: 
+            <input type="email" name="email" /> 
+        </label>
+        <label>Password: 
+            <input type="password" name="password" /> 
+        </label>
+        <label>Password Confirmation: 
+            <input type="password" name="password_confirmation" /> 
+        </label>
+        <input type="submit" value="Register" />
+    </form>
+    <h2>Login</h2>
+    <form action="/login" method="post">
+        {% csrf_token %}
+        {% if messages %}
+            {% for message in messages %}
+                <p class="{{ message.tags }}">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+        <label>Email: 
+            <input type="email" name="email" /> 
+        </label>
+        <label>Password: 
+            <input type="password" name="password" /> 
+        </label>
+        <input type="submit" value="Login" />
+    </form>
+</body>
+</html>
